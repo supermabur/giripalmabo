@@ -79,7 +79,8 @@ class trpesancartController extends Controller
                     'ls_cicilan1' => $request->ls_cicilan1 ? $request->ls_cicilan1 : 0,
                     'ls_admin' => $request->ls_admin ? $request->ls_admin : 0,
                     'ls_asuransi' => $request->ls_asuransi ? $request->ls_asuransi : 0,
-                    'keterangan' => $request->keterangan
+                    'keterangan' => $request->keterangan,
+                    'nonotamanual' => $request->nonotamanual
                 );
         
                 DB::table('trpesantmph')->updateOrInsert(['userid' => $cur_user->id], 
@@ -126,13 +127,14 @@ class trpesancartController extends Controller
                 if ($tmp == 0) {
                     return response()->json(['error' => 'Info customer belum diisi']);}
                 else{
-                    $tmp = DB::table('trpesantmph')->selectraw("kdgudang, csnama, csalamat, csnohp, cskota")->where('userid', $cur_user->id)->first();
+                    $tmp = DB::table('trpesantmph')->selectraw("kdgudang, csnama, csalamat, csnohp, cskota, nonotamanual")->where('userid', $cur_user->id)->first();
                     $err = '';
                     if ($tmp->csnama == '') {return response()->json(['error' => 'Nama Customer masih kosong']);}
                     if ($tmp->csalamat == '') {return response()->json(['error' => 'Alamat customer masih kosong']);}
                     if ($tmp->cskota == '') {return response()->json(['error' => 'Kota Customer masih kosong']);}
                     if ($tmp->csnohp == '') {return response()->json(['error' => 'No HP Customer masih kosong']);}
                     if ($tmp->kdgudang == '') {return response()->json(['error' => 'Outlet belum di pilih']);}
+                    if ($tmp->nonotamanual == '') {return response()->json(['error' => 'No Nota Manual masih kosong']);}
                 }
 
                 $tmp = DB::table('trpesantmpbayar')->where('userid', $cur_user->id)->sum('jumlah');

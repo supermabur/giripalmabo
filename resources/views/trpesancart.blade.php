@@ -206,6 +206,12 @@
                         </div>
                     </div>
                     <div class="mb-2 row">
+                        <label class="col-lab col-form-label">No Nota Manual</label>
+                        <div class="col">
+                            <input type="text" class="sv form-control form-control-sm" autocomplete="off" id="nonotamanual" value="{{ $pesanhead->nonotamanual ?? '' }}">
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
                         <label class="col-lab col-form-label">Keterangan</label>
                         <div class="col">
                             <textarea id="keterangan" class="sv form-control" autocomplete="off" cols="30" rows="2">{{ $pesanhead->keterangan ?? '' }}</textarea>
@@ -591,6 +597,7 @@
             var ls_admin = $('#ls_admin').val();
             var ls_asuransi = $('#ls_asuransi').val();
             var keterangan = $('#keterangan').val();
+            var nonotamanual = $('#nonotamanual').val();
 
             $('#loader').show();
             $('#btnsave').prop('disabled', true);
@@ -609,6 +616,7 @@
                         ls_admin: ls_admin,
                         ls_asuransi: ls_asuransi,
                         keterangan: keterangan,
+                        nonotamanual: nonotamanual,
                         _token: _token};
             $.ajax({
                     url: '{{ route("cartsp.store") }}',
