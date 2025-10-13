@@ -47,6 +47,7 @@ class trpesancartController extends Controller
         $mstongkir = mstongkir::orderby('kota')->get();
         $mstgudang = mstgudang::where('kode','<>', '')->where('nama','<>', '-')->orderby('nama')->get();
         $mstleasing = posframe_mstleasing::orderby('nama')->get();
+        $mstcv = DB::table('mstcv')->where('aktif', '<>', 0)->get();
         $pesanhead = DB::table('trpesantmph')->where('userid', $cur_user->id)->first();
         // $pesanbayar = DB::table('vwtrpesantmpbayar')->where('userid', $cur_user->id)->get();
         $pesanbayar = $this->gettablebodyhtmlbayar();
@@ -55,7 +56,7 @@ class trpesancartController extends Controller
         $cartcount = $this->cartcount();  
         $total = $this->gettotaltransaksi();
 
-        return view('trpesancart',compact('title', 'mstbarang', 'mstgudang', 'mstongkir', 'mstleasing', 'mstbayar', 'cartcount', 'pesanhead', 'pesanbayar', 'total'));
+        return view('trpesancart',compact('title', 'mstbarang', 'mstgudang', 'mstongkir', 'mstleasing', 'mstcv', 'mstbayar', 'cartcount', 'pesanhead', 'pesanbayar', 'total'));
     }
 
     
@@ -80,7 +81,8 @@ class trpesancartController extends Controller
                     'ls_admin' => $request->ls_admin ? $request->ls_admin : 0,
                     'ls_asuransi' => $request->ls_asuransi ? $request->ls_asuransi : 0,
                     'keterangan' => $request->keterangan,
-                    'nonotamanual' => $request->nonotamanual
+                    'nonotamanual' => $request->nonotamanual,
+                    'idcv' => $request->idcv
                 );
         
                 DB::table('trpesantmph')->updateOrInsert(['userid' => $cur_user->id], 
@@ -127,13 +129,14 @@ class trpesancartController extends Controller
                 if ($tmp == 0) {
                     return response()->json(['error' => 'Info customer belum diisi']);}
                 else{
-                    $tmp = DB::table('trpesantmph')->selectraw("kdgudang, csnama, csalamat, csnohp, cskota, nonotamanual")->where('userid', $cur_user->id)->first();
+                    $tmp = DB::table('trpesantmph')->selectraw("kdgudang, csnama, csalamat, csnohp, cskota, nonotamanual, idcv")->where('userid', $cur_user->id)->first();
                     $err = '';
                     if ($tmp->csnama == '') {return response()->json(['error' => 'Nama Customer masih kosong']);}
                     if ($tmp->csalamat == '') {return response()->json(['error' => 'Alamat customer masih kosong']);}
                     if ($tmp->cskota == '') {return response()->json(['error' => 'Kota Customer masih kosong']);}
                     if ($tmp->csnohp == '') {return response()->json(['error' => 'No HP Customer masih kosong']);}
                     if ($tmp->kdgudang == '') {return response()->json(['error' => 'Outlet belum di pilih']);}
+                    if ($tmp->idcv == '') {return response()->json(['error' => 'CV belum di pilih']);}
                     if ($tmp->nonotamanual == '') {return response()->json(['error' => 'No Nota Manual masih kosong']);}
                 }
 

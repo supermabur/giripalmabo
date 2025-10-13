@@ -206,6 +206,17 @@
                         </div>
                     </div>
                     <div class="mb-2 row">
+                        <label class="col-lab col-form-label">CV</label>
+                        <div class="col">
+                            <select id="idcv" class="sv form-control form-control-sm sel2">
+                                {{-- <option value=""></option> --}}
+                                @foreach ($mstcv as $d)
+                                    <option value="{{ $d->id }}" {{ ($pesanhead->idcv ?? '') == $d->id ? 'selected' : '' }}>{{ $d->nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mb-2 row">
                         <label class="col-lab col-form-label">No Nota Manual</label>
                         <div class="col">
                             <input type="text" class="sv form-control form-control-sm" autocomplete="off" id="nonotamanual" value="{{ $pesanhead->nonotamanual ?? '' }}">
@@ -586,6 +597,7 @@
 
         function savehead(){
             var kdgudang = $('#kdgudang').val();
+            var idcv = $('#idcv').val();
             var csnama = $('#csnama').val();
             var csalamat = $('#csalamat').val();
             var csnohp = $('#csnohp').val();
@@ -605,6 +617,7 @@
             // loading2(1, '#col' + kode, 'Saving ...');
             var pdata = {mode:'savehead', 
                         kdgudang: kdgudang,
+                        idcv: idcv,
                         csnama: csnama,
                         csalamat: csalamat,
                         csnohp: csnohp,

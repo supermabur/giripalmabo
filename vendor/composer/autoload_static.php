@@ -217,9 +217,9 @@ class ComposerStaticInit7280fd20e08c234a6f794a0515201dda
         ),
         'phpDocumentor\\Reflection\\' => 
         array (
-            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
-            1 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
-            2 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            0 => __DIR__ . '/..' . '/phpdocumentor/reflection-docblock/src',
+            1 => __DIR__ . '/..' . '/phpdocumentor/type-resolver/src',
+            2 => __DIR__ . '/..' . '/phpdocumentor/reflection-common/src',
         ),
         'ZipStream\\' => 
         array (
@@ -227,9 +227,9 @@ class ComposerStaticInit7280fd20e08c234a6f794a0515201dda
         ),
         'Yajra\\DataTables\\' => 
         array (
-            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
+            0 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
             1 => __DIR__ . '/..' . '/yajra/laravel-datatables-editor/src',
-            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-fractal/src',
+            2 => __DIR__ . '/..' . '/yajra/laravel-datatables-buttons/src',
             3 => __DIR__ . '/..' . '/yajra/laravel-datatables-html/src',
             4 => __DIR__ . '/..' . '/yajra/laravel-datatables-oracle/src',
         ),
